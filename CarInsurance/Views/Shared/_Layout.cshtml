@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> ShutUp&Drive</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body style="font-family:'Lucida Sans Typewriter';">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul style="display:flex; justify-content:space-evenly; text-align:end; width:100%;" class="nav navbar-nav">
+                    <li style="font-size:1.5em; font-family:'Imprint MT Shadow'; color: royalblue;">@Html.ActionLink("ShutUp&Drive!", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Get Quoted", "Create", "Insuree")</li>
+                    <li>@Html.ActionLink("Passengers", "Index", "Insuree")</li>
+                    <li>@Html.ActionLink("About Us", "About", "Home")</li>
+                    <li>@Html.ActionLink("Driver's Seat", "Admin", "Insuree")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+
+        <hr />
+    </div>
+
+    <div class="banner"><img style="object-fit:cover; display:inline-block; height:200px; width:100%;margin:.5%;" src="https://i.ibb.co/bd00rnk/carinsiurance.jpg" alt="carinsiurance" border="0" />"></div>
+    <br />
+    <center>
+        <footer>
+            <p>&copy; @DateTime.Now.Year - ShutUp&Drive <a href="https://www.learncodinganywhere.com/" target="_blank" role="link">The Tech Academy</a></p>
+        </footer>
+    </center>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>a
