@@ -1,24 +1,22 @@
 ﻿using CarInsurance.Models;
 using System;
-using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using System.Xml.Linq;
 
 namespace CarInsurance.Controllers
 {
     public class InsureeController : Controller
     {
-        private InsuranceEntities db = new InsuranceEntities();
+        private static readonly InsuranceEntities insuranceEntities = new InsuranceEntities();
+        private InsuranceEntities db = insuranceEntities;
 
         // GET: Insuree Offer
         public ActionResult Index()
         {
             return View(db.Insurees.ToList());
         }
-
         public ActionResult Admin()
         {
             return View(db.Insurees.ToList());
@@ -50,115 +48,60 @@ namespace CarInsurance.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
 
-        public partial class Insuree
+      [HttpPost]
+      [ValidateAntiForgeryToken]
+            public ActionResult Create([Bind(Include = "Id,FirstName,LastName,EmailAddress,DateOfBirth,CarYear,CarMake,CarModel,DUI,SpeedingTickets,CoverageType,Quote")] Insuree insuree)
         {
-            public int Id { get; set; }
-            [Display(Name = "First Name")]
-            [Required]
-            public string FirstName { get; set; }
-            [Display(Name = "Last Name")]
-            [Required]
-            public string LastName { get; set; }
-            [Display(Name = "Email")]
-            [Required]
-            public string EmailAddress { get; set; }
-            [Display(Name = "Date of Birth")]
-            [Required]
-            public System.DateTime DateOfBirth { get; set; }
-            [Display(Name = "Year")]
-            [Required]
-            public int CarYear { get; set; }
-            [Display(Name = "Make")]
-            [Required]
-            public string CarMake { get; set; }
-            [Display(Name = "Model")]
-            [Required]
-            public string CarModel { get; set; }
-            [Display(Name = "DUI")]
-            public bool DUI { get; set; }
-            [Display(Name = "Number of Speeding Tickets")]
-            [Required]
-            public int SpeedingTickets { get; set; }
-            [Display(Name = "Add Collision")]
-            public bool CoverageType { get; set; }
-            public decimal? Quote
+            if (ModelState.IsValid)
             {
-                get
+                //set up the variables
+                int age = Convert.ToInt32(DateTime.Now.Year - insuree.DateOfBirth.Year);
+
+                //base cost $50/month
+                insuree.Quote = 50;
+                if (age <= 18)
                 {
-                    Insuree insuree = new Insuree();
-                    insuree.DateOfBirth = DateOfBirth;
-                    insuree.CarYear = CarYear;
-                    insuree.CarMake = CarMake.ToLower();
-                    insuree.CarModel = CarModel.ToLower();
-                    insuree.DUI = DUI;
-                    insuree.SpeedingTickets = SpeedingTickets;
-                    insuree.CoverageType = CoverageType;
+                    insuree.Quote += 100;
+                }
+                else if (age >= 19 && age <= 25)
+                {
+                    insuree.Quote += 50;
+                }
+                else
+                {
+                    insuree.Quote += 25;
+                }
 
-                    float quote = 0f;
-                    int monthlyQuote = 50;
-                    int extras = 0;
-                    int age = Convert.ToInt32(DateTime.Now.Year - insuree.DateOfBirth.Year);
-                    if (age <= 18)
+                if (insuree.CarYear < 2000 || insuree.CarYear > 2015)
                     {
-                        monthlyQuote += 100;
-                    }
-                    else if (age >= 19 && age <= 25)
-                    {
-                        monthlyQuote += 50;
-                    }
-                    else
-                    {
-                        monthlyQuote += 25;
+                       insuree.Quote += 25;
                     }
 
-                    if (insuree.CarYear >= 2000 && insuree.CarYear <= 2015)
+                if (insuree.CarMake == "Porsche")
+                {
+                    insuree.Quote += 25;
+
+                    if (insuree.CarModel == "911 carrera")
                     {
-                        monthlyQuote += 0;
+                        insuree.Quote += 25;
                     }
-                    else
+                }
+
+                if (insuree.SpeedingTickets > 0)
+                {
+                    insuree.Quote += insuree.SpeedingTickets * 10;
+                }
+
+                 if (insuree.DUI)
                     {
-                        monthlyQuote += 25;
-                    }
-
-                    if (insuree.CarMake == "Porsche")
-                    {
-                        extras += 25;
-
-                        if (insuree.CarModel == "911 carrera")
-                        {
-                            extras += 50;
-                        }
-                    }
-
-                    monthlyQuote += insuree.SpeedingTickets * 10;
-
-                    quote = (monthlyQuote) + extras;
-
-                    if (insuree.DUI)
-                    {
-                        quote = (float)(quote * 1.25);
+                    insuree.Quote *= 1.25m;
                     }
 
                     if (insuree.CoverageType)
                     {
-                        quote = (float)(quote * 1.5);
+                    insuree.Quote *= 1.5m;
                     }
-                    return (decimal)quote;
-                }
-                set
-                {
-                    // A dynamically computed field needs an empty set to fulfill prop requirements
-                }
-            }
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,EmailAddress,DateOfBirth,CarYear,CarMake,CarModel,DUI,SpeedingTickets,CoverageType,Quote")] Insuree insuree)
-        {
-            if (ModelState.IsValid)
-            {
-                Convert.ToInt32();
-                db.Insurees.Add(insuree);
+                db.Insurees.Add(insuree);  
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -192,7 +135,7 @@ namespace CarInsurance.Controllers
             {
                 db.Entry(insuree).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", insuree);
             }
             return View(insuree);
         }
