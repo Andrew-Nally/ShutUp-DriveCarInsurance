@@ -85,10 +85,6 @@ C:\Users\Andre\Desktop\ShutUp&Drive_CarInsurance\CarInsurance\obj\Debug\CarInsur
 C:\Users\Andre\Desktop\ShutUp&Drive_CarInsurance\CarInsurance\obj\Debug\CarInsurance.csproj.CoreCompileInputs.cache
 C:\Users\Andre\Desktop\ShutUp&Drive_CarInsurance\CarInsurance\obj\Debug\CarInsurance.dll
 C:\Users\Andre\Desktop\ShutUp&Drive_CarInsurance\CarInsurance\obj\Debug\CarInsurance.pdb
-C:\Users\Andre\Desktop\ShutUp-DriveCarInsurance\CarInsurance\obj\Debug\CarInsurance.csprojAssemblyReference.cache
-C:\Users\Andre\Desktop\ShutUp-DriveCarInsurance\CarInsurance\obj\Debug\CarInsurance.csproj.CoreCompileInputs.cache
-C:\Users\Andre\Desktop\ShutUp-DriveCarInsurance\CarInsurance\obj\Debug\CarInsurance.dll
-C:\Users\Andre\Desktop\ShutUp-DriveCarInsurance\CarInsurance\obj\Debug\CarInsurance.pdb
 C:\Users\Andre\Desktop\ShutUp-DriveCarInsurance\CarInsurance\bin\CarInsurance.dll.config
 C:\Users\Andre\Desktop\ShutUp-DriveCarInsurance\CarInsurance\bin\CarInsurance.dll
 C:\Users\Andre\Desktop\ShutUp-DriveCarInsurance\CarInsurance\bin\CarInsurance.pdb
@@ -167,4 +163,8 @@ C:\Users\Andre\Desktop\ShutUp-DriveCarInsurance\CarInsurance\bin\System.Web.WebP
 C:\Users\Andre\Desktop\ShutUp-DriveCarInsurance\CarInsurance\bin\Newtonsoft.Json.xml
 C:\Users\Andre\Desktop\ShutUp-DriveCarInsurance\CarInsurance\bin\Antlr3.Runtime.pdb
 C:\Users\Andre\Desktop\ShutUp-DriveCarInsurance\CarInsurance\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Andre\Desktop\ShutUp-DriveCarInsurance\CarInsurance\obj\Debug\CarInsurance.csproj.CoreCompileInputs.cache
 C:\Users\Andre\Desktop\ShutUp-DriveCarInsurance\CarInsurance\obj\Debug\CarInsurance.csproj.CopyComplete
+C:\Users\Andre\Desktop\ShutUp-DriveCarInsurance\CarInsurance\obj\Debug\CarInsurance.dll
+C:\Users\Andre\Desktop\ShutUp-DriveCarInsurance\CarInsurance\obj\Debug\CarInsurance.pdb
+C:\Users\Andre\Desktop\ShutUp-DriveCarInsurance\CarInsurance\obj\Debug\CarInsurance.csprojAssemblyReference.cache

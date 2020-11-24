@@ -9,9 +9,8 @@ namespace CarInsurance.Controllers
 {
     public class InsureeController : Controller
     {
-        private static readonly InsuranceEntities insuranceEntities = new InsuranceEntities();
-        private InsuranceEntities db = insuranceEntities;
-
+       private InsuranceEntities db = new InsuranceEntities();
+       
         // GET: Insuree Offer
         public ActionResult Index()
         {
@@ -73,9 +72,9 @@ namespace CarInsurance.Controllers
                 }
 
                 if (insuree.CarYear < 2000 || insuree.CarYear > 2015)
-                    {
-                       insuree.Quote += 25;
-                    }
+                {
+                    insuree.Quote += 25;
+                }
 
                 if (insuree.CarMake == "Porsche")
                 {
@@ -92,16 +91,17 @@ namespace CarInsurance.Controllers
                     insuree.Quote += insuree.SpeedingTickets * 10;
                 }
 
-                 if (insuree.DUI)
-                    {
+                if (insuree.DUI)
+                {
                     insuree.Quote *= 1.25m;
-                    }
+                }
 
-                    if (insuree.CoverageType)
-                    {
+                if (insuree.CoverageType)
+                {
                     insuree.Quote *= 1.5m;
-                    }
-                db.Insurees.Add(insuree);  
+                }
+
+                 db.Insurees.Add(insuree);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
